@@ -17,7 +17,7 @@ let urlDB;
 if (process.env.NODE_ENV === 'dev')
     urlDB = 'mongodb://localhost:27017/cafe';
 else
-    urlDB = 'mongodb://cafeDB:1ClaveComplicada@ds051943.mlab.com:51943/cafe';
+    urlDB = process.env.MONGO_URL;
 
 //Variable inventada con nombre URLDB
 process.env.URLDB = urlDB;
