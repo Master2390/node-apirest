@@ -35,3 +35,8 @@ else
 
 //Variable inventada con nombre URLDB
 process.env.URLDB = urlDB;
+
+//===================
+// Google Client ID
+//===================
+process.env.CLIENT_ID = process.env.CLIENT_ID || '590662029250-1du2s3q8f5h3rq1vtrkuth5a4q62n36l.apps.googleusercontent.com';
