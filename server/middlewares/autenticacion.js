@@ -10,7 +10,7 @@ let verificaToken = (req, res, next) => {
         if (err) {
             return res.status(401).json({
                 ok: false,
-                err: 'Error en la verificacion del token'
+                err
             });
         }
         req.usuario = decoded.usuario;

@@ -41,7 +41,7 @@ app.post('/usuario', [verificaToken, verificaAdminRole], function(req, res) {
         email: body.email,
         password: bcrypt.hashSync(body.password, 10),
         role: body.role
-    })
+    });
 
     usuario.save((err, usuarioBD) => {
         if (err) {
@@ -75,7 +75,7 @@ app.put('/usuario/:id', [verificaToken, verificaAdminRole], function(req, res) {
             usuario: usuarioBD
         })
 
-    })
+    });
 
 });
 
@@ -126,7 +126,6 @@ app.put('/usuario/:id', [verificaToken, verificaAdminRole], function(req, res) {
 
 app.delete('/usuario/:id', [verificaToken, verificaAdminRole], function(req, res) {
     let id = req.params.id;
-    let fisica = req.query.fisica;
 
     let usuario = {
         estado: false
