@@ -10,7 +10,9 @@ let verificaToken = (req, res, next) => {
         if (err) {
             return res.status(401).json({
                 ok: false,
-                err
+                err: {
+                    msg: 'Token No Valido'
+                }
             });
         }
         req.usuario = decoded.usuario;
@@ -19,7 +21,7 @@ let verificaToken = (req, res, next) => {
 };
 
 //===================
-// Verificarcion de Token
+// Verificarcion de Rol
 //===================
 
 let verificaAdminRole = (req, res, next) => {
@@ -27,13 +29,36 @@ let verificaAdminRole = (req, res, next) => {
     if (usuario.role !== "ADMIN_ROLE") {
         return res.json({
             ok: false,
-            err: 'No Tiene Permisos para Ejecutar la Accion'
+            err: {
+                msg: 'No Tiene Permisos para Ejecutar la Accion'
+            }
         });
     }
     next();
 };
 
+//===================
+// Verificarcion token de imagenes
+//===================
+
+let verificaTokenImg = (req, res, next) => {
+    let token = req.query.token;
+    jwt.verify(token, process.env.SEED_TOKEN, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({
+                ok: false,
+                err: {
+                    msg: 'Token No Valido'
+                }
+            });
+        }
+        req.usuario = decoded.usuario;
+        next();
+    });
+};
+
 module.exports = {
     verificaToken,
-    verificaAdminRole
+    verificaAdminRole,
+    verificaTokenImg
 }
